@@ -1,11 +1,12 @@
-# Azure Ml Deployment Review Test Prompts & Harness
+# Azure ML Deployment Review Test Prompts & Harness
 
-## Test Case 1: Standard / Happy Path
-- **Input**: `tests/input-sample.md`
-- **Prompt**: "Apply azure-ml-deployment-review to review the provided specification."
-- **Expected Outcome**: Produces structured executive summary, risk table, and actionable recommendations.
+## Test 1: Production Managed Online Deployment (Compliant)
+- **Input File**: `tests/input-good.md`
+- **User Prompt**: "Review this production Azure ML managed deployment specification for our payment scoring service."
+- **Expected Skill Behavior**: Validates autoscaling rules, probes, and resource sizing. Returns `APPROVED` status.
 
-## Test Case 2: Risky / Adversarial Input
-- **Input**: `tests/input-risky.md`
-- **Prompt**: "Evaluate this high-risk scenario using azure-ml-deployment-review."
-- **Expected Outcome**: Correctly flags missing parameters, ambiguous clauses, and severe risks.
+## Test 2: High-Risk Unscaled Endpoint (Flawed)
+- **Input File**: `tests/input-risky.md`
+- **User Prompt**: "Perform an architectural risk audit on this Azure ML deployment YAML before we deploy to production."
+- **Expected Skill Behavior**: Identifies single instance SPOF, missing liveness/readiness probes, extreme concurrency risk, and hardcoded secret. Returns `ACTION_REQUIRED` with drop-in YAML redlines.
+

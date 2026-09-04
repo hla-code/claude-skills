@@ -76,16 +76,23 @@ def check_skill(skill_dir: Path) -> list[str]:
     if word_count > 800:
         errors.append(f"SKILL.md body is {word_count} words (exceeds recommended 800-word limit). Move domain knowledge into references/ folder to keep SKILL.md lean.")
 
-    # 3. Check reference links
-    ref_links = re.findall(r"\[.*?\]\((?:file:///)?references/([^\)]+)\)", body)
+    # 3. Check reference links & references folder
     references_dir = skill_dir / "references"
+    if not references_dir.exists() or not references_dir.is_dir():
+        errors.append("Missing 'references/' directory. Keep reusable domain knowledge and checklists in references/.")
+    else:
+        ref_files = list(references_dir.glob("*.md"))
+        if len(ref_files) == 0:
+            errors.append("References directory has no .md files.")
+
+    ref_links = re.findall(r"\[.*?\]\((?:file:///)?references/([^\)]+)\)", body)
     for ref_file in ref_links:
         clean_ref = ref_file.split("#")[0]
         target_path = references_dir / clean_ref
         if not target_path.exists():
             errors.append(f"Broken reference link: references/{clean_ref} does not exist")
 
-    # 4. Check Test Harness
+    # 4. Check Test Harness (canonical 4-file suite)
     tests_dir = skill_dir / "tests"
     if not tests_dir.exists() or not tests_dir.is_dir():
         errors.append("Missing 'tests/' directory. Every skill must have a test harness.")
@@ -94,9 +101,16 @@ def check_skill(skill_dir: Path) -> list[str]:
         if not prompts_file.exists():
             errors.append("Missing 'tests/prompts.md'. Add representative test prompts and expected evaluation criteria.")
         
-        test_files = list(tests_dir.glob("*.md"))
-        if len(test_files) < 2:
-            errors.append("Test harness should contain at least 2 files (e.g. prompts.md + input sample or expected eval).")
+        has_good = (tests_dir / "input-good.md").exists() or (tests_dir / "input-sample.md").exists()
+        has_risky = (tests_dir / "input-risky.md").exists()
+        has_eval = (tests_dir / "expected-behavior.md").exists() or (tests_dir / "expected-eval.md").exists()
+
+        if not has_good:
+            errors.append("Missing compliant test case (e.g. 'tests/input-good.md').")
+        if not has_risky:
+            errors.append("Missing risky/adversarial test case (e.g. 'tests/input-risky.md').")
+        if not has_eval:
+            errors.append("Missing evaluation benchmark (e.g. 'tests/expected-behavior.md').")
 
     return errors
 
@@ -142,3 +156,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

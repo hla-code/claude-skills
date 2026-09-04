@@ -1,30 +1,25 @@
 ---
 name: azure-ml-deployment-review
-description: Review Azure ML deployment configs for endpoint security, autoscaling, container sizing, and SLA risks.
+description: Review Azure ML managed online endpoints, compute sizing, autoscaling rules, private networking, egress security, and SLA readiness.
 ---
 
-# Azure Ml Deployment Review
+# Azure ML Deployment Review Skill
 
-Use this skill when analyzing or performing azure ml deployment review workflows.
+Use this skill when reviewing Azure Machine Learning (Azure ML) managed online endpoints, deployment YAML templates, inference container resource allocations, and production serving architectures.
 
-## Workflow
+## Process
 
-1. **Context & Input Gathering**: Identify core objectives, constraints, inputs, and stakeholders.
-2. **Analysis & Verification**: Validate against domain standards (refer to [checklist.md](file:///references/checklist.md)).
-3. **Synthesis & Remediation**: Formulate precise recommendations, fixes, or implementation steps.
+1. **Endpoint & Infrastructure Inspection**: Verify compute SKU suitability, instance count, auto-scaling thresholds, and multi-zone redundancy.
+2. **Network & Identity Security**: Check VNet integration, private endpoint configuration, egress lockdown, TLS termination, and Azure Managed Identity usage (refer to [security-and-networking-checklist.md](file:///references/security-and-networking-checklist.md)).
+3. **Reliability & Probe Auditing**: Inspect liveness/readiness probes, container timeouts, retry policies, and blue/green traffic splitting.
+4. **Cost & Sizing Verification**: Flag over-provisioned GPU/CPU allocations or under-provisioned memory limits that risk Out-Of-Memory (OOM) failures.
+5. **Remediation**: Provide drop-in Azure CLI / ARM / Bicep / YAML snippets with exact parameter corrections.
 
-## Required Output Format
+## Output
 
-Always return the response in this structured layout:
+Return:
+- **Overall Verdict**: `[APPROVED | APPROVED_WITH_CONDITIONS | ACTION_REQUIRED]`
+- **Deployment Health Summary**: 2–3 sentences on throughput, resilience, and security compliance.
+- **Risk & Gap Matrix**: High / Medium / Low findings across compute, security, and scaling.
+- **Suggested Configuration Fixes**: Drop-in YAML redlines with exact parameter paths.
 
-### 1. Executive Summary
-- **Status**: [APPROVED | ACTION_REQUIRED | REJECTED]
-- **Key Takeaway**: 1–2 sentences summarizing the verdict.
-
-### 2. Detailed Findings & Recommendations
-| Area | Observation | Severity (High/Med/Low) | Recommended Action |
-| :--- | :--- | :--- | :--- |
-| ... | ... | ... | ... |
-
-### 3. Concrete Action Items / Replacement Content
-- Exact wording, code, or configuration changes ready for direct application.
