@@ -41,6 +41,7 @@ claude-skills/
 
 | Skill Name | Scope / Trigger | Key References | Test Harness Status |
 | :--- | :--- | :--- | :--- |
+| **`mmm-concise-brief`** | Zero-fluff, ADHD-friendly MMM briefs, strict < 250 word limit, zero hallucination | [Decision Rules](file:///.claude/skills/mmm-concise-brief/references/concise-decision-rules.md) | ✅ Passed (4/4 files) |
 | **`sow-review`** | Scope clarity, acceptance events, IP terms, client dependencies, redlines | [Checklist](file:///.claude/skills/sow-review/references/acceptance-criteria-checklist.md), [Taxonomy](file:///.claude/skills/sow-review/references/risk-taxonomy.md), [Clauses](file:///.claude/skills/sow-review/references/replacement-clauses.md) | ✅ Passed (4/4 files) |
 | **`contract-risk-review`** | Commercial liability caps, indemnities, SLA penalties, termination terms | [Checklist](file:///.claude/skills/contract-risk-review/references/contract-risk-checklist.md), [Protective Clauses](file:///.claude/skills/contract-risk-review/references/standard-protective-clauses.md) | ✅ Passed (4/4 files) |
 | **`mmm-model-review`** | MMM decomposition audit, adstock decay half-lives, saturation, autocorrelation | [Checklist](file:///.claude/skills/mmm-model-review/references/mmm-audit-checklist.md), [Benchmarks](file:///.claude/skills/mmm-model-review/references/adstock-decay-benchmarks.md) | ✅ Passed (4/4 files) |

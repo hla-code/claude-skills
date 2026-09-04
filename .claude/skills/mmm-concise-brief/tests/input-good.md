@@ -1,0 +1,24 @@
+﻿# Complete MMM Campaign Performance Data (Compliant Baseline)
+
+- **Target Break-even ROAS**: .20
+- **Overall Spend**: ,200,000 / quarter
+- **Channel 1 (Brand Search)**:
+  - Spend: ,000
+  - ROAS: .80 (mROAS: .10)
+  - Adstock Half-Life: 1.0 weeks
+  - Saturation: 85% of ceiling reached
+- **Channel 2 (Non-Brand Search)**:
+  - Spend: ,000
+  - ROAS: .45 (mROAS: .35)
+  - Adstock Half-Life: 2.0 weeks
+  - Saturation: 50% of ceiling
+- **Channel 3 (Meta Social)**:
+  - Spend: ,000
+  - ROAS: .10 (mROAS: .75)
+  - Adstock Half-Life: 2.5 weeks
+  - Saturation: 92% past diminishing returns
+- **Channel 4 (Linear TV)**:
+  - Spend: ,000
+  - ROAS: .90 (mROAS: .85)
+  - Adstock Half-Life: 6.0 weeks
+  - Saturation: Early curve (wide confidence interval)
